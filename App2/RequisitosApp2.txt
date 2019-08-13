@@ -1,0 +1,29 @@
+﻿1) Calcula Juros
+Responde pelo path relativo "/calculajuros"
+
+Ela faz um cálculo em memória, de juros compostos, conforme abaixo: Valor Final = Valor Inicial * (1 + juros) ^ Tempo
+
+Valor inicial é um decimal recebido como parâmetro.
+
+Valor do Juros deve ser consultado na API 1.
+
+Tempo é um inteiro, que representa meses, também recebido como parâmetro.
+
+^ representa a operação de potência.
+
+Resultado final deve ser truncado (sem arredondamento) em duas casas decimais.
+
+Exemplo: /calculajuros?valorinicial=100&meses=5 Resultado esperado: 105,10
+
+2) Show me the code
+Este responde pelo path relativo /showmethecode Deverá retornar a url de onde encontra-se o fonte no github
+
+Esperamos que a entrega tenha
+
+Código fonte em asp.net core no github (Mostrar conhecimento básico de git)
+Teste unitários (Mostrar conhecimento de testes unitários, se possível TDD)
+Utilização de Docker
+Extras
+O ideal é este código rodar em algum servidor seu, podemos combinar tempo que irá funcionar. Se não tiver avise o entrevistador.
+Teste de integração da API em linguagem de sua preferência (Damos importância para pirâmide de testes)
+Utilizar swagger
