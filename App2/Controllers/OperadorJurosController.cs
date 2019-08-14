@@ -14,46 +14,21 @@ namespace App2.Controllers
     [Route("/calculajuros/{valorinicial}/{meses}")]
     public class OperadorJurosController : ControllerBase
     {
-        static CancellationTokenSource tokenSource ;
         [HttpGet]
         public decimal CalculaJuros(double valorinicial, int meses)
         {
+            
+            WebApiHelper helper = new WebApiHelper("http://localhost:5505/");
+            var data = helper.GetAsync();
             OperadorJuros operadorJuros = new OperadorJuros
             {
                 ValorInicial = valorinicial,
-                Meses = meses
-            }; 
-            OperadorJurosRepositorio operadorRepositorio = new OperadorJurosRepositorio();
-            tokenSource = new CancellationTokenSource();
-            Task<double> taxajuros = operadorRepositorio.GetAsync(tokenSource.Token);
-            taxajuros.ContinueWith(task =>
-            {
-                operadorJuros.TaxaJuros = task.Result;
-                operadorJuros.ValorFinal = Convert.ToDecimal(Math.Pow(operadorJuros.ValorInicial * (1 + operadorJuros.TaxaJuros), operadorJuros.Meses));
-                Environment.Exit(0);
-            }, TaskContinuationOptions.OnlyOnRanToCompletion);
-            taxajuros.ContinueWith(
-               HandleError,
-               TaskContinuationOptions.OnlyOnFaulted);
-
-            taxajuros.ContinueWith(
-                HandleCancellation,
-                TaskContinuationOptions.OnlyOnCanceled);
+                Meses = meses,
+                TaxaJuros = Convert.ToDouble(data)
+            };
+            operadorJuros.ValorFinal = Convert.ToDecimal(Math.Pow(operadorJuros.ValorInicial * (1 + operadorJuros.TaxaJuros), operadorJuros.Meses));
 
             return operadorJuros.ValorFinal;
         }
-        private static void HandleError(Task<double> task)
-        {
-            Console.WriteLine("\n Há um problema na recuperação dos dados");
-            Environment.Exit(1);
-        }
-
-        private static void HandleCancellation(Task<double> task)
-        {
-            Console.WriteLine("\n Aoperação foi cancelada");
-            Environment.Exit(0);
-        }
-
-
     }
 }

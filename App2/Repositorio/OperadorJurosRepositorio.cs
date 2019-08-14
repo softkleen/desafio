@@ -16,7 +16,7 @@ namespace App2.Repositorio
 
         public OperadorJurosRepositorio()
         {
-           jurosApp1.BaseAddress = new Uri("http://localhost:5505/");
+           jurosApp1.BaseAddress = new Uri("http://localhost:5505/taxajuros");
            jurosApp1.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }

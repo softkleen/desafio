@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services:
   app1:
@@ -6,10 +6,14 @@ services:
     build:
       context: .
       dockerfile: App1/Dockerfile
+     
+
 
   app2:
     image: app2
     build:
       context: .
       dockerfile: App2/Dockerfile
+    
+
 
